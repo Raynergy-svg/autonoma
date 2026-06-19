@@ -8,6 +8,7 @@ import { applicationSetupHttpRouter } from "./application-setup/application-setu
 import { auth, createContext, storageProvider } from "./context";
 import { diffsHttpRouter } from "./diffs/diffs-http.router";
 import { env } from "./env";
+import { externalRunsHttpRouter } from "./external-runs/external-runs-http.router";
 import { githubHttpRouter } from "./github/github-http.router";
 import { getOrCreateDevIdentity } from "./local-dev/dev-auth";
 import { posthogProxyRouter } from "./posthog/posthog-proxy.router";
@@ -100,6 +101,10 @@ export function createApiApp() {
     // ─── Application Setup (Claude plugin API) ────────────────────────
 
     app.route("/v1/setup", applicationSetupHttpRouter);
+
+    // ─── External Runs (external agent result ingestion) ──────────────
+
+    app.route("/v1/external-runs", externalRunsHttpRouter);
 
     // ─── Diffs ─────────────────────────────────────────────────────
 

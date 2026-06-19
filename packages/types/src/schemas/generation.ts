@@ -113,3 +113,50 @@ export type UploadArtifactsBody = z.infer<typeof UploadArtifactsBodySchema>;
 /** Canonical body for `POST /v1/setup/setups/:id/scenario-recipe-versions`. */
 export const UploadScenarioRecipeVersionsBodySchema = ScenarioRecipesFileSchema;
 export type UploadScenarioRecipeVersionsBody = z.infer<typeof UploadScenarioRecipeVersionsBodySchema>;
+
+// ─── External Run Ingestion ───────────────────────────────────────────────────
+//
+// Canonical body for `POST /v1/external-runs`. Lets an external local agent
+// (e.g. scripts/agent-runtime) record a completed test-run RESULT into the
+// platform so it renders in the dashboard runs list + detail. The endpoint
+// find-or-creates the minimal supporting chain (application/branch/snapshot/
+// folder/test-case/steps/assignment) so the caller only needs to describe the
+// result — it never needs to know any internal IDs.
+
+/** A single executed step of an external run. */
+export const ExternalRunStepSchema = z.object({
+    /** Interaction kind, e.g. "navigate", "click", "assert". Free-form. */
+    interaction: z.string().min(1),
+    /** Interaction parameters, e.g. `{ url: "..." }` or `{ selector: "..." }`. */
+    params: z.record(z.string(), z.unknown()).default({}),
+    /** Result of executing the step. Free-form object, e.g. `{ outcome: "ok" }`. */
+    output: z.record(z.string(), z.unknown()).optional(),
+    /** Optional storage keys for before/after screenshots (already uploaded). */
+    screenshotBefore: z.string().optional(),
+    screenshotAfter: z.string().optional(),
+});
+export type ExternalRunStep = z.infer<typeof ExternalRunStepSchema>;
+
+export const ExternalRunBodySchema = z.object({
+    /** Human-readable test name. Used to find-or-create the TestCase by slug. */
+    testCaseName: z.string().min(1),
+    /** The base URL the run targeted. Recorded on the first/synthetic step. */
+    baseUrl: z.string().optional(),
+    /** Terminal result of the run. */
+    status: z.enum(["pass", "fail"]),
+    /** Executed steps, in order. If empty, a single synthetic step is recorded. */
+    steps: z.array(ExternalRunStepSchema).default([]),
+    /** Free-form notes / failure reasoning, surfaced in the run detail view. */
+    notes: z.string().optional(),
+    /** Total cost of the run in US dollars (optional; recorded as a cost record). */
+    costUsd: z.number().nonnegative().optional(),
+    /** Wall-clock runtime in milliseconds (drives the dashboard duration column). */
+    runtimeMs: z.number().int().nonnegative().optional(),
+    /**
+     * Optional application name to attribute the run to. Defaults to a dedicated
+     * "External Runs" application so external results never collide with real
+     * github-backed applications.
+     */
+    applicationName: z.string().optional(),
+});
+export type ExternalRunBody = z.infer<typeof ExternalRunBodySchema>;

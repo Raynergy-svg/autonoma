@@ -21,6 +21,20 @@ import { codex } from "./adapters/codex.mjs";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ADAPTERS = { "claude-code": claudeCode, codex };
 
+// Load repo-root .env (for AUTONOMA_RESULT_API_KEY/URL) without overriding real env.
+(function loadEnv() {
+    const envPath = path.resolve(HERE, "..", "..", ".env");
+    if (!existsSync(envPath)) return;
+    for (const line of readFileSync(envPath, "utf8").split("\n")) {
+        const t = line.trim();
+        if (!t || t.startsWith("#")) continue;
+        const i = t.indexOf("=");
+        if (i === -1) continue;
+        const k = t.slice(0, i).trim();
+        if (process.env[k] === undefined) process.env[k] = t.slice(i + 1).trim();
+    }
+})();
+
 // Playwright MCP tools the agent is allowed to use (server is named "playwright").
 const PLAYWRIGHT_TOOLS = [
     "browser_navigate",
@@ -33,6 +47,42 @@ const PLAYWRIGHT_TOOLS = [
     "browser_console_messages",
     "browser_wait_for",
 ].map((t) => `mcp__playwright__${t}`);
+
+/**
+ * Report the agent's verdict back to the platform's external-runs ingestion
+ * endpoint so the run shows up in the dashboard. No-op if no API key is set.
+ */
+async function reportToPlatform({ name, baseUrl, runtimeId, verdict, costUsd, runtimeMs }) {
+    const apiUrl = process.env.AUTONOMA_RESULT_API_URL ?? "http://localhost:4000";
+    const apiKey = process.env.AUTONOMA_RESULT_API_KEY;
+    if (apiKey == null || verdict == null) return { reported: false, reason: apiKey == null ? "no API key" : "no verdict" };
+
+    const body = {
+        testCaseName: name,
+        status: verdict.status === "pass" ? "pass" : "fail",
+        baseUrl,
+        notes: `${verdict.notes ?? ""} [runtime=${runtimeId}]`.trim(),
+        costUsd: costUsd ?? undefined,
+        runtimeMs: runtimeMs ?? undefined,
+        applicationName: "External Runs",
+        steps: (verdict.steps ?? []).map((s) => ({
+            interaction: s.action ?? `step ${s.n}`,
+            params: {},
+            output: { status: s.status ?? "", observed: s.observed ?? "" },
+        })),
+    };
+    try {
+        const res = await fetch(`${apiUrl}/v1/external-runs/runs`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+            body: JSON.stringify(body),
+        });
+        const json = await res.json().catch(() => ({}));
+        return { reported: res.ok, status: res.status, runId: json.runId, body: json };
+    } catch (e) {
+        return { reported: false, reason: e.message };
+    }
+}
 
 function parseFrontmatter(raw) {
     const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -132,6 +182,11 @@ async function main() {
     console.log(`\nruntime ok: ${result.ok}   cost: ${result.costUsd != null ? `$${result.costUsd.toFixed(4)}` : "n/a"}`);
     console.log(`verdict: ${verdict ? verdict.status : "(no JSON verdict parsed)"}`);
     console.log(`result → ${path.relative(process.cwd(), outPath)}`);
+
+    // Close the loop: report into the platform so the run shows in the dashboard.
+    const report = await reportToPlatform({ name, baseUrl, runtimeId, verdict, costUsd: result.costUsd });
+    if (report.reported) console.log(`dashboard: ✓ run recorded (runId ${report.runId})`);
+    else console.log(`dashboard: ✗ not recorded (${report.reason ?? `HTTP ${report.status}`})`);
 }
 
 main().catch((e) => {

@@ -111,8 +111,8 @@ function OnboardingLayout() {
       {/* Top nav */}
       <div className="fixed left-0 right-0 top-0 z-50 flex h-14 shrink-0 items-center justify-between border-b border-border-dim bg-surface-void/80 px-6 backdrop-blur">
         <span className="flex items-center gap-2">
-          <img src="/smartdebtflow-logo.png" alt="Smart Debt Flow" className="h-6 w-6 rounded" />
-          <span className="font-display text-sm font-semibold text-text-primary">Smart Debt Flow</span>
+          <img src="/smartdebtflow-logo.png" alt="Flow Agent" className="h-6 w-6 rounded" />
+          <span className="font-display text-sm font-semibold text-text-primary">Flow Agent</span>
         </span>
         <div className="flex items-center gap-2">
           <span className="font-mono text-2xs text-text-tertiary">{user?.name ?? user?.email ?? ""}</span>

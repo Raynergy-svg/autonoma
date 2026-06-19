@@ -54,7 +54,7 @@ export function SidebarAgentStatus({ collapsed }: { collapsed: boolean }) {
         <BrailleSpinner animation={STATE_ANIMATION[state]} size="sm" className="text-primary-ink" />
         {!collapsed && (
           <div className="min-w-0 flex-1">
-            <p className="text-2xs font-medium text-text-primary">Smart Debt Flow Agent</p>
+            <p className="text-2xs font-medium text-text-primary">Flow Agent</p>
             <p className="font-mono text-3xs text-text-secondary">{AGENT_INDICATOR_STATE_LABEL[state]}</p>
           </div>
         )}
@@ -77,7 +77,7 @@ export function SidebarAgentStatus({ collapsed }: { collapsed: boolean }) {
         <TooltipContent side="right">
           <div className="flex flex-col gap-1">
             <div>
-              <span className="font-medium">Smart Debt Flow Agent</span>
+              <span className="font-medium">Flow Agent</span>
               <span className="ml-1.5 text-text-tertiary">{AGENT_INDICATOR_STATE_LABEL[state]}</span>
             </div>
             {activities.map((activity) => (

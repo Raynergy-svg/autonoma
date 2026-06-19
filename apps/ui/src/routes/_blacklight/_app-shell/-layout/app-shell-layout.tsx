@@ -20,14 +20,27 @@ import { AppBreadcrumb, PendingOnboardingBanner } from "./top-bar";
 
 function GridBackground() {
   return (
-    <div
-      className="pointer-events-none absolute inset-0 opacity-5"
-      style={{
-        backgroundImage:
-          "linear-gradient(var(--border-dim) 1px, transparent 1px), linear-gradient(90deg, var(--border-dim) 1px, transparent 1px)",
-        backgroundSize: "60px 60px",
-      }}
-    />
+    <>
+      {/* Daybreak warm dawn-glow rising from the bottom (honey · coral · emerald) */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(120% 70% at 50% 120%, rgba(230,173,85,0.14), transparent 60%)," +
+            "radial-gradient(90% 55% at 14% 122%, rgba(240,135,106,0.10), transparent 55%)," +
+            "radial-gradient(80% 50% at 86% 124%, rgba(54,198,146,0.07), transparent 55%)",
+        }}
+      />
+      {/* Faint grid */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "linear-gradient(var(--border-dim) 1px, transparent 1px), linear-gradient(90deg, var(--border-dim) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+    </>
   );
 }
 
@@ -42,7 +55,7 @@ function MinimalLayout({ children }: { children: ReactNode }) {
       <div className="relative z-10 flex h-14 shrink-0 items-center justify-between border-b border-border-dim bg-surface-void/80 px-6 backdrop-blur">
         <Link to="/">
           <span className="flex items-center gap-2">
-            <img src="/smartdebtflow-logo.png" alt="Flow Agent" className="h-6 w-6 rounded" />
+            <img src="/flow-agent.svg" alt="Flow Agent" className="h-6 w-6" />
             <span className="font-display text-sm font-semibold text-text-primary">Flow Agent</span>
           </span>
         </Link>

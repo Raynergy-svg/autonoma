@@ -1,0 +1,33 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flow Agent">
+  <defs>
+    <linearGradient id="fa-flow" x1="8" y1="36" x2="40" y2="12" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#36c692"/>
+      <stop offset="0.45" stop-color="#e6ad55"/>
+      <stop offset="1" stop-color="#f0876a"/>
+    </linearGradient>
+    <linearGradient id="fa-tile" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1b150d"/>
+      <stop offset="1" stop-color="#0c0a07"/>
+    </linearGradient>
+    <radialGradient id="fa-node" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe6ad"/>
+      <stop offset="0.55" stop-color="#e6ad55"/>
+      <stop offset="1" stop-color="#e6ad55" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- warm-night tile -->
+  <rect x="1" y="1" width="46" height="46" rx="12" fill="url(#fa-tile)" stroke="#e6ad55" stroke-opacity="0.22"/>
+
+  <!-- trailing flow line (depth) -->
+  <path d="M10 38 C 19 38, 22 31, 28 30" stroke="url(#fa-flow)" stroke-opacity="0.35"
+        stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- primary rising flow -->
+  <path d="M9 33 C 17 33, 19 24, 24.5 23 C 30 22, 32 15, 38 13" stroke="url(#fa-flow)"
+        stroke-width="4.5" stroke-linecap="round" fill="none"/>
+
+  <!-- agent node + glow at the leading edge -->
+  <circle cx="38" cy="13" r="7" fill="url(#fa-node)" opacity="0.55"/>
+  <circle cx="38" cy="13" r="3.4" fill="#ffe6ad"/>
+</svg>

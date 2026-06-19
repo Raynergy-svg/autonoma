@@ -10,74 +10,76 @@
 /* ═══════════════════════════════════════════
    Default - Blacklight Dark (lime on void)
    ═══════════════════════════════════════════ */
+/* Smart Debt Flow — Daybreak theme (warm "night → daybreak": honey + coral on
+   warm night, ported from the SDF landing page's Daybreak design system). */
 .blacklight-dark {
-  --background: #050505;
-  --foreground: #EDEDED;
-  --card: #0A0A0A;
-  --card-foreground: #EDEDED;
-  --popover: #111111;
-  --popover-foreground: #EDEDED;
-  --primary: #C2E812;
-  --primary-foreground: #050505;
-  --secondary: #111111;
-  --secondary-foreground: #EDEDED;
-  --muted: #111111;
-  --muted-foreground: #888888;
-  --accent: #C2E812;
-  --accent-foreground: #050505;
-  --destructive: #FF3333;
-  --border: #222222;
-  --input: #333333;
-  --ring: #C2E812;
+  --background: #0c0a07;
+  --foreground: #f3eee4;
+  --card: #15110b;
+  --card-foreground: #f3eee4;
+  --popover: #1b150d;
+  --popover-foreground: #f3eee4;
+  --primary: #e6ad55;
+  --primary-foreground: #0c0a07;
+  --secondary: #1b150d;
+  --secondary-foreground: #f3eee4;
+  --muted: #1b150d;
+  --muted-foreground: #8c8071;
+  --accent: #e6ad55;
+  --accent-foreground: #0c0a07;
+  --destructive: #f0876a;
+  --border: #2a2218;
+  --input: #3a3020;
+  --ring: #e6ad55;
 
   /* Chart tokens */
-  --chart-1: #C2E812;
-  --chart-2: #00CC66;
-  --chart-3: #FF8800;
-  --chart-4: #FF3333;
-  --chart-5: #FFCC00;
+  --chart-1: #e6ad55;
+  --chart-2: #36c692;
+  --chart-3: #f0876a;
+  --chart-4: #8fdcff;
+  --chart-5: #f3eee4;
 
-  --radius: 0rem;
+  --radius: 0.5rem;
 
   /* Sidebar tokens */
-  --sidebar: #0A0A0A;
-  --sidebar-foreground: #EDEDED;
-  --sidebar-primary: #C2E812;
-  --sidebar-primary-foreground: #050505;
-  --sidebar-accent: #111111;
-  --sidebar-accent-foreground: #EDEDED;
-  --sidebar-border: #222222;
-  --sidebar-ring: #C2E812;
+  --sidebar: #100d09;
+  --sidebar-foreground: #f3eee4;
+  --sidebar-primary: #e6ad55;
+  --sidebar-primary-foreground: #0c0a07;
+  --sidebar-accent: #1b150d;
+  --sidebar-accent-foreground: #f3eee4;
+  --sidebar-border: #2a2218;
+  --sidebar-ring: #e6ad55;
 
   /* ── Surface tiers ── */
-  --surface-void: #141414;
-  --surface-base: #1A1A1A;
-  --surface-raised: #222222;
+  --surface-void: #0c0a07;
+  --surface-base: #15110b;
+  --surface-raised: #1f1810;
 
   /* ── Border tiers ── */
-  --border-dim: #2A2A2A;
-  --border-mid: #333333;
-  --border-highlight: #444444;
+  --border-dim: #2a2218;
+  --border-mid: #3a3020;
+  --border-highlight: #4a3d28;
 
   /* ── Text tiers ── */
-  --text-primary: #EDEDED;
-  --text-secondary: #898989;
-  --text-tertiary: #707070;
+  --text-primary: #f3eee4;
+  --text-secondary: #bcae99;
+  --text-tertiary: #8c8071;
 
   /* ── Status colors ── */
-  --status-critical: #FF3333;
-  --status-high: #FF8800;
-  --status-warn: #FFCC00;
-  --status-success: #00CC66;
-  --status-pending: #38BDF8;
+  --status-critical: #f0876a;
+  --status-high: #f0876a;
+  --status-warn: #e6ad55;
+  --status-success: #36c692;
+  --status-pending: #8fdcff;
 
   /* ── Accent glow ── */
-  --accent-glow: rgba(194, 232, 18, 0.4);
-  --accent-dim: rgba(194, 232, 18, 0.1);
+  --accent-glow: rgba(230, 173, 85, 0.4);
+  --accent-dim: rgba(230, 173, 85, 0.1);
 
-  --primary-contrast: #C2E812;
-  --violet-accent: #8B5CF6;
-  --primary-ink: #C2E812;
+  --primary-contrast: #e6ad55;
+  --violet-accent: #8fdcff;
+  --primary-ink: #e6ad55;
 }
 
 /* ═══════════════════════════════════════════

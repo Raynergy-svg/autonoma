@@ -41,7 +41,10 @@ function MinimalLayout({ children }: { children: ReactNode }) {
 
       <div className="relative z-10 flex h-14 shrink-0 items-center justify-between border-b border-border-dim bg-surface-void/80 px-6 backdrop-blur">
         <Link to="/">
-          <img src="/logo.svg" alt="Autonoma" className="h-5 w-auto" />
+          <span className="flex items-center gap-2">
+            <img src="/smartdebtflow-logo.png" alt="Smart Debt Flow" className="h-6 w-6 rounded" />
+            <span className="font-display text-sm font-semibold text-text-primary">Smart Debt Flow</span>
+          </span>
         </Link>
         <div className="flex items-center gap-2">
           <span className="font-mono text-2xs text-text-tertiary">{user?.name ?? user?.email ?? "User"}</span>
@@ -118,7 +121,7 @@ export function AppShellLayout({ children }: { children: ReactNode }) {
 
             <div className="relative z-10 flex shrink-0 flex-col">
               <div className="flex items-center justify-center gap-2 bg-primary px-4 py-1.5 text-2xs font-medium text-primary-foreground">
-                <span>You're using an early version of Autonoma.</span>
+                <span>You're using an early version of Smart Debt Flow.</span>
                 <button
                   type="button"
                   onClick={openFeedbackSurvey}

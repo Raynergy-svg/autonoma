@@ -49,3 +49,6 @@ step2-result.json
 scripts/claude-agent/.task.json
 scripts/claude-agent/.result.json
 .playwright-mcp/
+
+# agent-runtime transient result
+scripts/agent-runtime/.result.json

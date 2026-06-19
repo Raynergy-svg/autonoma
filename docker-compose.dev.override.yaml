@@ -1,0 +1,19 @@
+# Local-run overrides (not committed upstream):
+#  - host 5432/6379 taken by local Homebrew postgres/redis → remap host ports
+#  - postgres:18-alpine mount-layout change → pin to 17
+#  - pnpm v11 SQLite store index fails on the /app bind mount (Docker file-sharing
+#    can't do SQLite locking) → put the store on the ext4 node_modules volume
+services:
+  postgresql:
+    image: postgres:17-alpine
+    ports:
+      - "5433:5432"
+  redis:
+    ports:
+      - "6380:6379"
+  api:
+    environment:
+      npm_config_store_dir: /app/node_modules/.pnpm-store
+  ui:
+    environment:
+      npm_config_store_dir: /app/node_modules/.pnpm-store

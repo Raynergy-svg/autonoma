@@ -22,6 +22,7 @@
         "detect-object": "tsx --env-file=.env scripts/detect-object.ts"
     },
     "dependencies": {
+        "@ai-sdk/anthropic": "catalog:",
         "@ai-sdk/google": "catalog:",
         "@ai-sdk/groq": "catalog:",
         "@autonoma/errors": "workspace:*",

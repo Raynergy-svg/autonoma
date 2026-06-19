@@ -6,7 +6,7 @@
 export { ModelRegistry, type LanguageModel } from "./registry/model-registry";
 export type { ModelOptions, ModelReasoningEffort } from "./registry/options";
 export { MODEL_ENTRIES, OPENROUTER_MODEL_ENTRIES } from "./registry/model-entries";
-export { openRouterProvider } from "./registry/providers";
+export { openRouterProvider, anthropicProvider } from "./registry/providers";
 export { simpleCostFunction, inputCacheCostFunction } from "./registry/costs";
 export type { ModelUsage } from "./registry/usage";
 export { CostCollector, type CostRecord } from "./registry/cost-collector";

@@ -1,3 +1,4 @@
+import { createAnthropic } from "@ai-sdk/anthropic";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createGroq } from "@ai-sdk/groq";
 import { createOpenRouter } from "@openrouter/ai-sdk-provider";
@@ -29,3 +30,7 @@ export const groqProvider = new LLMProvider(() => createGroq({ apiKey: env.GROQ_
 export const googleProvider = new LLMProvider(() => createGoogleGenerativeAI({ apiKey: env.GEMINI_API_KEY }));
 
 export const openRouterProvider = new LLMProvider(() => createOpenRouter({ apiKey: env.OPENROUTER_API_KEY }));
+
+// Anthropic (Claude). Lazily instantiated — the API key is only read on first use
+// of a Claude model entry, so ANTHROPIC_API_KEY can stay unset otherwise.
+export const anthropicProvider = new LLMProvider(() => createAnthropic({ apiKey: env.ANTHROPIC_API_KEY }));

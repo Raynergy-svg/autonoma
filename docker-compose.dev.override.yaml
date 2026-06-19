@@ -17,3 +17,5 @@ services:
   ui:
     environment:
       npm_config_store_dir: /app/node_modules/.pnpm-store
+      # UI runs in its own container — proxy /v1 to the api service, not localhost.
+      API_PROXY_TARGET: http://api:4000

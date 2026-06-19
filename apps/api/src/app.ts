@@ -9,6 +9,7 @@ import { auth, createContext, storageProvider } from "./context";
 import { diffsHttpRouter } from "./diffs/diffs-http.router";
 import { env } from "./env";
 import { githubHttpRouter } from "./github/github-http.router";
+import { getOrCreateDevIdentity } from "./local-dev/dev-auth";
 import { posthogProxyRouter } from "./posthog/posthog-proxy.router";
 import { appRouter } from "./routes/router";
 import { stripeHttpRouter } from "./stripe/stripe-http.router";
@@ -73,6 +74,26 @@ export function createApiApp() {
     );
 
     app.use("/v1/auth/*", cors(corsOptions));
+
+    // LOCAL_DEV auth teardown: return the seeded dev session so the web UI's auth
+    // guard treats you as logged in without Google OAuth. Registered before the
+    // Better Auth catch-all so it wins for this path. Never runs in production.
+    if (env.LOCAL_DEV) {
+        app.get("/v1/auth/get-session", async (c) => {
+            const real = await auth.api.getSession({ headers: c.req.raw.headers });
+            if (real?.user != null) return c.json(real);
+            const dev = await getOrCreateDevIdentity();
+            return c.json({ user: dev.user, session: dev.session });
+        });
+        // The web UI's app-shell guard also calls Better Auth's organization.list;
+        // with no real session that 401s. Return the seeded dev org so the guard passes.
+        app.get("/v1/auth/organization/list", async (c) => {
+            const real = await auth.api.getSession({ headers: c.req.raw.headers });
+            if (real?.user != null) return auth.handler(c.req.raw);
+            const dev = await getOrCreateDevIdentity();
+            return c.json([dev.organization]);
+        });
+    }
 
     app.on(["POST", "GET"], "/v1/auth/**", (c) => auth.handler(c.req.raw));
 

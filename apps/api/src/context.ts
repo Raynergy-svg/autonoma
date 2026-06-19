@@ -15,6 +15,7 @@ import type { AuthSession, AuthUser } from "./auth";
 import { buildAuth } from "./auth";
 import { env } from "./env";
 import { buildGitHubApp } from "./github/github-app";
+import { LOCAL_DEV, getOrCreateDevIdentity } from "./local-dev/dev-auth";
 import { connectRedis } from "./redis";
 import { buildServices } from "./routes/build-services";
 
@@ -48,6 +49,14 @@ export async function createContext(c: HonoContext) {
                 session = { activeOrganizationId: keyCtx.organizationId } as unknown as AuthSession;
             }
         }
+    }
+
+    // LOCAL_DEV auth teardown: no real session and no API key → act as the seeded
+    // dev user so the platform is usable without Google OAuth. Never runs in prod.
+    if (user == null && LOCAL_DEV) {
+        const dev = await getOrCreateDevIdentity();
+        user = dev.user as unknown as AuthUser;
+        session = dev.session as unknown as AuthSession;
     }
 
     return {

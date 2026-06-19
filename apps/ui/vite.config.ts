@@ -15,6 +15,15 @@ function readApiPort(): string {
     }
 }
 
+/**
+ * Where the dev server proxies /v1 + /ingest. Defaults to localhost (host-run
+ * `pnpm dev`), but in docker-compose the UI runs in its own container where
+ * localhost is NOT the API — set API_PROXY_TARGET=http://api:4000 there.
+ */
+function apiProxyTarget(): string {
+    return process.env.API_PROXY_TARGET ?? `http://localhost:${readApiPort()}`;
+}
+
 export default defineConfig({
     plugins: [
         tanstackRouter(),
@@ -66,11 +75,11 @@ export default defineConfig({
         port: 3000,
         proxy: {
             "/v1": {
-                target: `http://localhost:${readApiPort()}`,
+                target: apiProxyTarget(),
                 changeOrigin: true,
             },
             "/ingest": {
-                target: `http://localhost:${readApiPort()}`,
+                target: apiProxyTarget(),
                 changeOrigin: true,
             },
         },

@@ -20,7 +20,8 @@
         "agent:execute": "pnpm --filter @autonoma/api agent:execute",
         "db:restore": "tsx scripts/restore-db-from-backup.ts",
         "prepare": "husky",
-        "fetch-secret": "node -e \"import('@autonoma-ai/envsync').then(({ saveSecretToEnv }) => saveSecretToEnv())\""
+        "fetch-secret": "node -e \"import('@autonoma-ai/envsync').then(({ saveSecretToEnv }) => saveSecretToEnv())\"",
+        "claude-agent": "node scripts/claude-agent/run.mjs"
     },
     "devDependencies": {
         "@autonoma-ai/envsync": "^2.0.1",

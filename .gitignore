@@ -44,3 +44,8 @@ step2-result.json
 
 # local pnpm store (store-dir override)
 .pnpm-store/
+
+# claude-agent transient run artifacts
+scripts/claude-agent/.task.json
+scripts/claude-agent/.result.json
+.playwright-mcp/

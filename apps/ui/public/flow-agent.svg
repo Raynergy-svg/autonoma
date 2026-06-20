@@ -1,48 +1,48 @@
 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flow Agent">
   <defs>
-    <linearGradient id="fa-tile" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#1b150d"/>
+    <linearGradient id="fa-tile" x1="24" y1="2" x2="24" y2="46" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1c160e"/>
       <stop offset="1" stop-color="#0c0a07"/>
     </linearGradient>
+    <radialGradient id="fa-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#e6ad55"/>
+      <stop offset="1" stop-color="#e6ad55" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
-  <!-- warm-night tile -->
-  <rect x="1" y="1" width="46" height="46" rx="12" fill="url(#fa-tile)" stroke="#e6ad55" stroke-opacity="0.22"/>
+  <rect x="1.5" y="1.5" width="45" height="45" rx="13" fill="url(#fa-tile)" stroke="#e6ad55" stroke-opacity="0.28"/>
 
-  <!-- coral braces { } -->
+  <ellipse cx="24" cy="22.5" rx="13.5" ry="8.5" fill="url(#fa-glow)" opacity="0.08">
+    <animate attributeName="opacity" values="0.06;0.17;0.06" keyTimes="0;0.5;1" dur="3.4s" repeatCount="indefinite"/>
+  </ellipse>
+
   <g stroke="#f0876a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M11 14 C 7 14, 8.5 22, 6.5 24 C 8.5 26, 7 34, 11 34"/>
-    <path d="M37 14 C 41 14, 39.5 22, 41.5 24 C 39.5 26, 41 34, 37 34"/>
+    <path d="M11 15 Q 8.5 15 8.5 18.5 Q 8.5 22 6.5 23.5 Q 8.5 25 8.5 28.5 Q 8.5 32 11 32"/>
+    <path d="M37 15 Q 39.5 15 39.5 18.5 Q 39.5 22 41.5 23.5 Q 39.5 25 39.5 28.5 Q 39.5 32 37 32"/>
   </g>
 
-  <!-- nose / mouth dot (shared) -->
-  <circle cx="24" cy="29" r="1.9" fill="#f0c46a"/>
+  <circle cx="24" cy="30.5" r="1.8" fill="#f4c97a"/>
 
-  <!-- animated eyes: >.<  →  >.>  →  <.<  →  blink -->
-  <g stroke="#f0c46a" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <!-- A: >.<  (rest) -->
+  <g stroke="#f4c97a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none">
     <g opacity="0">
-      <animate attributeName="opacity" calcMode="discrete" values="1;0;0;0;1;1" keyTimes="0;0.5;0.667;0.833;0.9;1" dur="6s" repeatCount="indefinite"/>
-      <path d="M13 18 L20 23 L13 28"/>
-      <path d="M35 18 L28 23 L35 28"/>
+      <animate attributeName="opacity" calcMode="discrete" values="1;0;0;0;1;1" keyTimes="0;0.5;0.66;0.82;0.88;1" dur="6s" repeatCount="indefinite"/>
+      <path d="M14.3 18.3 L20.7 22.5 L14.3 26.7"/>
+      <path d="M33.7 18.3 L27.3 22.5 L33.7 26.7"/>
     </g>
-    <!-- B: >.>  (glance right) -->
     <g opacity="0">
-      <animate attributeName="opacity" calcMode="discrete" values="0;1;0;0;0;0" keyTimes="0;0.5;0.667;0.833;0.9;1" dur="6s" repeatCount="indefinite"/>
-      <path d="M13 18 L20 23 L13 28"/>
-      <path d="M27 18 L34 23 L27 28"/>
+      <animate attributeName="opacity" calcMode="discrete" values="0;1;0;0;0;0" keyTimes="0;0.5;0.66;0.82;0.88;1" dur="6s" repeatCount="indefinite"/>
+      <path d="M14.3 18.3 L20.7 22.5 L14.3 26.7"/>
+      <path d="M27.3 18.3 L33.7 22.5 L27.3 26.7"/>
     </g>
-    <!-- C: <.<  (glance left) -->
     <g opacity="0">
-      <animate attributeName="opacity" calcMode="discrete" values="0;0;1;0;0;0" keyTimes="0;0.5;0.667;0.833;0.9;1" dur="6s" repeatCount="indefinite"/>
-      <path d="M20 18 L13 23 L20 28"/>
-      <path d="M35 18 L28 23 L35 28"/>
+      <animate attributeName="opacity" calcMode="discrete" values="0;0;1;0;0;0" keyTimes="0;0.5;0.66;0.82;0.88;1" dur="6s" repeatCount="indefinite"/>
+      <path d="M20.7 18.3 L14.3 22.5 L20.7 26.7"/>
+      <path d="M33.7 18.3 L27.3 22.5 L33.7 26.7"/>
     </g>
-    <!-- D: blink -.- -->
     <g opacity="0">
-      <animate attributeName="opacity" calcMode="discrete" values="0;0;0;1;0;0" keyTimes="0;0.5;0.667;0.833;0.9;1" dur="6s" repeatCount="indefinite"/>
-      <path d="M13 23 L21 23"/>
-      <path d="M27 23 L35 23"/>
+      <animate attributeName="opacity" calcMode="discrete" values="0;0;0;1;0;0" keyTimes="0;0.5;0.66;0.82;0.88;1" dur="6s" repeatCount="indefinite"/>
+      <path d="M14 24 Q 17.5 21 21 24"/>
+      <path d="M27 24 Q 30.5 21 34 24"/>
     </g>
   </g>
 </svg>
